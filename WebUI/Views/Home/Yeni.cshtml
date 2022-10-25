@@ -1,0 +1,44 @@
+﻿@using Fabrika;
+@model WebUI.ViewModels.YeniÜrün
+
+@{
+    ViewData["Title"] = "Yeni";
+}
+
+<h1>Yeni</h1>
+
+<h4>Yeni Ürün</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Yeni">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Adı" class="control-label"></label>
+                <input asp-for="Adı" class="form-control" />
+                <span asp-validation-for="Adı" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Açıklama" class="control-label"></label>
+                <textarea asp-for="Açıklama" class="form-control" style="height:40px;width:400px"></textarea> 
+                <span asp-validation-for="Açıklama" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tipi" class="control-label"></label>
+                <select asp-for="Tipi"  asp-items="@Html.GetEnumSelectList<ÜrünTipleri>()" class="form-control" ></select>
+                <span asp-validation-for="Tipi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index"> Ana Sayfaya Geri Dön </a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
